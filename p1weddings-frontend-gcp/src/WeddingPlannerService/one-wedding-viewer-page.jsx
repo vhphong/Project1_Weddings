@@ -1,35 +1,33 @@
 import { useState } from "react";
 import { useRef } from "react";
 import axios from "axios";
-import OneWeddingTable from "./one-wedding-table";
 
 
 export default function OneWeddingViewerPage() {
 
     // GOOD================================================
     const [retrievedOneWedding, setOneWedding] = useState();
-    const weddingIdInputToShow = useRef(null);
+    const emailIDInputToShow = useRef(null);
 
     async function getOneWedding(event) {
         try {
-            const weddingID = weddingIdInputToShow.current.value;
-            const response = await axios.get(`http://localhost:3000/weddings/${weddingID}`);
-            console.log(response);
-            const oneWeddingResult = response.data;
-            setOneWedding(oneWeddingResult);
+            const email = String(emailIDInputToShow.current.value);
+            const response = await axios.get(`http://localhost:3000/weddings/${email}`);
 
-            document.getElementById("weddingid").innerHTML = oneWeddingResult.weddingID;
+            const oneWeddingResult = response.data;
+
+            document.getElementById("weddingemail").innerHTML = oneWeddingResult.email;
             document.getElementById("wnames").innerHTML = oneWeddingResult.name;
-            document.getElementById("wdate").innerHTML = JSON.stringify(oneWeddingResult.weddingDate).slice(1, 11);
+            document.getElementById("wdate").innerHTML = oneWeddingResult.weddingDate;
             document.getElementById("wlocation").innerHTML = oneWeddingResult.weddingLocation;
             document.getElementById("wbudget").innerHTML = oneWeddingResult.budget.toFixed(2);
 
-            document.getElementById("oneweddingresult").innerHTML = "";
-        } catch (error) {
-            console.log(error);
-            document.getElementById("oneweddingresult").innerHTML = `Wedding ID ${weddingIdInputToShow.current.value} does not exist or was deleted!!!`;
+            document.getElementById("oneweddingresult").innerHTML = '';
 
-            document.getElementById("weddingid").innerHTML = "";
+        } catch (error) {
+            document.getElementById("oneweddingresult").innerHTML = `Wedding email ID ${emailIDInputToShow.current.value} does not exist or was deleted!!!`;
+
+            document.getElementById("weddingemail").innerHTML = "";
             document.getElementById("wnames").innerHTML = "";
             document.getElementById("wdate").innerHTML = "";
             document.getElementById("wlocation").innerHTML = "";
@@ -46,7 +44,7 @@ export default function OneWeddingViewerPage() {
                 <h3>Show A Wedding</h3>
             </div>
             <div>
-                <input placeholder="wedding ID to SHOW" type="number" ref={weddingIdInputToShow} required></input>
+                <input placeholder="wedding email" ref={emailIDInputToShow} required></input>
                 <button onClick={getOneWedding}>GET a Wedding</button>
             </div>
             <div>
@@ -56,16 +54,16 @@ export default function OneWeddingViewerPage() {
                 <table>
                     <thead>
                         <tr>
-                            <th>Wedding ID</th>
+                            <th>Email</th>
                             <th>Groom and Bride</th>
-                            <th>Wedding Date<br />(yyyy-mm-dd)</th>
+                            <th>Wedding Date<br />(dd/mm/yyyy)</th>
                             <th>Location</th>
                             <th>Budget</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td id="weddingid" style={{ "textAlign": "center" }}></td>
+                            <td id="weddingemail" style={{ "textAlign": "center" }}></td>
                             <td id="wnames" style={{ "textAlign": "center" }}></td>
                             <td id="wdate" style={{ "textAlign": "center" }}></td>
                             <td id="wlocation" style={{ "textAlign": "center" }}></td>
@@ -75,8 +73,6 @@ export default function OneWeddingViewerPage() {
                 </table>
             </div>
             <div>
-                {/* <OneWeddingTable oneWedding={retrievedOneWedding}></OneWeddingTable> */}
-                {/* <OneWeddingTable></OneWeddingTable> */}
             </div>
         </div>
     )

@@ -10,10 +10,10 @@ export default function DeleteWeddingForm() {
 
     async function deleteWedding(event) {
         try {
-            const weddingID = weddingIdInputToDelete.current.value;
-            const response = await axios.delete(`http://localhost:3000/weddings/${weddingID}`);
+            const email = weddingIdInputToDelete.current.value;
+            const response = await axios.delete(`http://localhost:3000/weddings/${email}`);
             console.log(response);
-            alert(`Wedding ID: ${weddingID} deleted :(( `);
+            alert(`Wedding ID: ${email} deleted :(( `);
         } catch (error) {
             console.log(error);
             alert('Enter a valid wedding ID to delete!');
@@ -29,7 +29,7 @@ export default function DeleteWeddingForm() {
                 <h3>Delete A Wedding</h3>
             </div>
             <div>
-                <input placeholder="wedding ID to DELETE" type="number" ref={weddingIdInputToDelete}></input>
+                <input placeholder="wedding email ID" ref={weddingIdInputToDelete}></input>
             </div>
             <div>
                 <button onClick={deleteWedding}>Delete Wedding</button>

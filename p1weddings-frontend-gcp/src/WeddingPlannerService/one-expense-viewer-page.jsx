@@ -7,7 +7,7 @@ import OneExpenseTable from "./one-wedding-table";
 export default function OneExpenseViewerPage() {
 
     // GOOD================================================
-    const [retrievedOneExpense, setOneExpense] = useState();
+    // const [retrievedOneExpense, setOneExpense] = useState();
     const expenseIdInputToShow = useRef(null);
 
     async function getOneExpense(event) {
@@ -16,10 +16,10 @@ export default function OneExpenseViewerPage() {
             const response = await axios.get(`http://localhost:3000/expenses/${expenseID}`);
             console.log(response);
             const oneExpenseResult = response.data;
-            setOneExpense(oneExpenseResult);
+            // setOneExpense(oneExpenseResult);
 
             document.getElementById("expenseid").innerHTML = oneExpenseResult.expenseID;
-            document.getElementById("wid").innerHTML = oneExpenseResult.wedding_ID;
+            document.getElementById("wid").innerHTML = oneExpenseResult.email;
             document.getElementById("reason").innerHTML = oneExpenseResult.reason;
             document.getElementById("amount").innerHTML = oneExpenseResult.amount.toFixed(2);
 

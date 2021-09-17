@@ -5,7 +5,7 @@ import axios from "axios";
 export default function CreateNewWeddingForm() {
 
     // GOOD================================================
-    const weddingIdInputToCreate = useRef(null);
+    const emailInputToCreate = useRef(null);
     const nameInputToCreate = useRef(null);
     const weddingDateInputToCreate = useRef(null);;
     const weddingLocationInputToCreate = useRef(null);
@@ -14,7 +14,7 @@ export default function CreateNewWeddingForm() {
     async function addWedding() {
 
         const newWedding = {
-            weddingID: 0,
+            email: emailInputToCreate.current.value,
             name: nameInputToCreate.current.value,
             weddingDate: weddingDateInputToCreate.current.value,
             weddingLocation: weddingLocationInputToCreate.current.value,
@@ -39,6 +39,7 @@ export default function CreateNewWeddingForm() {
             </div>
             <div>
                 {/* <input placeholder="wedding ID" type="number" ref={weddingIdInputToCreate}></input> */}
+                <input placeholder="email" ref={emailInputToCreate}></input>
                 <input placeholder="Groom & Bride' names" ref={nameInputToCreate}></input>
                 <input placeholder="wedding date" ref={weddingDateInputToCreate} type="date"></input>
                 <input placeholder="location" ref={weddingLocationInputToCreate}></input>
