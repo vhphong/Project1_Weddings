@@ -21,7 +21,11 @@ export default function ExpenseManagementPage() {
             </button>
 
             <button onClick={() => window.open("/expenses/view", "_self")}>
-                View an expense
+                View an expense by expense ID
+            </button>
+
+            <button onClick={() => window.open("/expenses/viewbyemail", "_self")}>
+                View all expenses by email ID
             </button>
 
             <button onClick={() => window.open("/expenses/update", "_self")}>

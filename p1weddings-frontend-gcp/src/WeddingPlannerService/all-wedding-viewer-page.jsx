@@ -24,13 +24,12 @@ export default function AllWeddingViewerPage() {
             {/* GOOD================================================ */}
             {/* SHOW ALL WEDDINGS */}
             <div>
-                {/* shows records manually*/}
                 <h3>Show All Weddings</h3>
-                <button onClick={(getAllWeddings)}>GET All Weddings</button>
+                <button onClick={(getAllWeddings)}>VIEW All Weddings</button>
             </div>
 
             <AllWeddingTable allWeddings={retrievedWeddings}></AllWeddingTable>
-            
+
             {/* <OneWeddingTable oneWedding={retrievedOneWedding}></OneWeddingTable> */}
         </div>
     )
