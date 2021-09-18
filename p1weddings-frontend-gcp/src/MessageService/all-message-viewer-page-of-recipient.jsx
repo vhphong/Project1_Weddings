@@ -28,8 +28,8 @@ export default function AllMessageViewerPageOfRecipient() {
                 <h3>View All Messages Of A Recipient</h3>
             </div>
             <div>
-                <input placeholder="recipient's email" ref={recipientEmail}></input>
                 <button onClick={getAllMessagesReceived}>VIEW All Messages Received By</button>
+                <input placeholder="recipient's email" ref={recipientEmail}></input>
                 <p id='messageresult'></p>
             </div>
             <div>

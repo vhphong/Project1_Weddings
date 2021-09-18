@@ -3,16 +3,18 @@ import { useRef, useState } from "react"
 import AllMessageTable from "./all-message-table";
 
 
-export default function AllMessageViewerPageOfSender() {
+export default function AllMessageViewerPageOfSenderRecipient() {
     const senderEmail = useRef(null);
+    const recipientEmail = useRef(null);
 
     const [retrievedMessage, setAllMessages] = useState([]);
 
-    async function getAllMessagesSent(event) {
+    async function getAllMessagesSentRecieved(event) {
         try {
             const senderEmailInput = String(senderEmail.current.value);
+            const recipientEmailInput = String(recipientEmail.current.value);
 
-            const response = await axios.get(`http://localhost:3000/messages?sender=${senderEmailInput}`);
+            const response = await axios.get(`http://localhost:3000/messages?sender=${senderEmailInput}&recipient=${recipientEmailInput}`);
             console.log(response);
             const allMessagesResult = response.data;
             setAllMessages(allMessagesResult);
@@ -25,11 +27,14 @@ export default function AllMessageViewerPageOfSender() {
     return (
         <div>
             <div>
-                <h3>View All Messages Of A Sender</h3>
+                <h3>View All Messages Of A Sender Sent to A Recipient</h3>
             </div>
             <div>
-                <button onClick={getAllMessagesSent}>VIEW All Messages Sent by </button>
+                <button onClick={getAllMessagesSentRecieved}>VIEW All Messages Sent FROM: </button>
                 <input placeholder="sender's email" ref={senderEmail}></input>
+                {/* <p>TO:</p> */}
+                <label> TO: </label>
+                <input placeholder="recipient's email" ref={recipientEmail}></input>
                 <p id='messageresult'></p>
             </div>
             <div>

@@ -17,6 +17,7 @@ export default function MessageServicePage() {
                 <button onClick={() => window.open("/messages/viewall", "_self")}>View all messages</button>
                 <button onClick={() => window.open("/messages/sender", "_self")}>View messages of a Sender</button>
                 <button onClick={() => window.open("/messages/recipient", "_self")}>View messages of a Recipient</button>
+                <button onClick={() => window.open("/messages/sender_recipient", "_self")}>View messages of a Sender sent to a Recipient</button>
             </div>
         </div>
     );

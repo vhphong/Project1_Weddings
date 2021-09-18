@@ -26,6 +26,7 @@ import CreateMessagePage from './MessageService/create-message-page';
 import AllMessageViewerPage from './MessageService/all-message-viewer-page';
 import AllMessageViewerPageOfSender from './MessageService/all-message-viewer-page-of-sender';
 import AllMessageViewerPageOfRecipient from './MessageService/all-message-viewer-page-of-recipient';
+import AllMessageViewerPageOfSenderRecipient from './MessageService/all-message-viewer-page-of-sender-recipient';
 
 
 // import OneWeddingTable from './components/one-wedding-table';
@@ -102,6 +103,10 @@ ReactDOM.render(
       <Route path="/messages/sender"><AllMessageViewerPageOfSender></AllMessageViewerPageOfSender></Route>
 
       <Route path="/messages/recipient"><AllMessageViewerPageOfRecipient></AllMessageViewerPageOfRecipient></Route>
+      
+      <Route path="/messages/sender_recipient"><AllMessageViewerPageOfSenderRecipient></AllMessageViewerPageOfSenderRecipient></Route>
+
+      
 
 
 
