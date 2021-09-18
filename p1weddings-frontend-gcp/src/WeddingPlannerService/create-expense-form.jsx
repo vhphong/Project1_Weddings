@@ -23,7 +23,7 @@ export default function CreateNewExpenseForm() {
         const response = await axios.post(`http://localhost:3000/expenses`, newExpense);
         console.log(response);
 
-        alert(`A new expense for wedding: ${weddingEmailIdInputToCreate.current.value} created. :)) `);
+        document.getElementById('createexpenseresult').innerHTML = `A new expense for wedding: ${weddingEmailIdInputToCreate.current.value} created. :)) `;
     }
 
 
@@ -43,6 +43,7 @@ export default function CreateNewExpenseForm() {
             <div>
                 <button onClick={addExpense}>CREATE a expense</button>
             </div>
+            <p id='createexpenseresult'></p>
         </div>
     )
 }

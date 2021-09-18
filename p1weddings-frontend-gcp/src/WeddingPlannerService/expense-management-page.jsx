@@ -11,7 +11,7 @@ export default function ExpenseManagementPage() {
             <div>
                 <h3>Expense Management Page</h3>
             </div>
-            
+
             <button onClick={() => window.open("/expenses/create", "_self")}>
                 Create a new expense
             </button>

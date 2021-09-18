@@ -105,10 +105,13 @@ app.get("/expenses/:expenseid", async (req, res) => {
 
 // GET expense by wedding email
 app.get("/expenses/email/:email", async (req, res) => {
-    const key = datastore.key(["Expenses", String(req.params.email)]);
-    const expense = await datastore.get(key);
+    const query = datastore.createQuery("Expenses").filter("email", "=", req.params.email);
+    const response = await datastore.runQuery(query);
 
-    res.send(expense[0]);
+    // const key = datastore.key(["Expenses", String(req.params.email)]);
+    // const expense = await datastore.get(key);
+
+    res.send(response[0]);
 });
 
 // UPDATE a wedding by email

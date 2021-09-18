@@ -28,8 +28,7 @@ export default function OneExpenseViewerPage() {
 
             document.getElementById("oneexpenseresult").innerHTML = "";
         } catch (error) {
-            alert(error);
-            
+            // alert(error);
             document.getElementById("oneexpenseresult").innerHTML = `Expense ID ${expenseIdInputToShow.current.value} does not exist or was deleted!`;
 
             document.getElementById("expenseid").innerHTML = "";

@@ -27,6 +27,7 @@ import AllMessageViewerPage from './MessageService/all-message-viewer-page';
 import AllMessageViewerPageOfSender from './MessageService/all-message-viewer-page-of-sender';
 import AllMessageViewerPageOfRecipient from './MessageService/all-message-viewer-page-of-recipient';
 import AllMessageViewerPageOfSenderRecipient from './MessageService/all-message-viewer-page-of-sender-recipient';
+import AllExpenseViewerPageByWeddingEmail from './WeddingPlannerService/all-expense-viewer-page-by-wed-email';
 
 
 // import OneWeddingTable from './components/one-wedding-table';
@@ -83,12 +84,14 @@ ReactDOM.render(
       <Route path="/expenses/viewall"><AllExpenseViewerPage></AllExpenseViewerPage></Route>
 
       <Route path="/expenses/view"><OneExpenseViewerPage></OneExpenseViewerPage></Route>
+      
+      <Route path="/expenses/viewbyemail"><AllExpenseViewerPageByWeddingEmail></AllExpenseViewerPageByWeddingEmail></Route>
 
       <Route path="/expenses/update"><UpdateExpenseForm></UpdateExpenseForm></Route>
 
       <Route path="/expenses/delete"><DeleteExpenseForm></DeleteExpenseForm></Route>
 
-
+    
 
       <Route path="/login"><EmployeeLoginPage></EmployeeLoginPage></Route>
 
@@ -105,15 +108,6 @@ ReactDOM.render(
       <Route path="/messages/recipient"><AllMessageViewerPageOfRecipient></AllMessageViewerPageOfRecipient></Route>
       
       <Route path="/messages/sender_recipient"><AllMessageViewerPageOfSenderRecipient></AllMessageViewerPageOfSenderRecipient></Route>
-
-      
-
-
-
-
-
-      
-
 
 
 

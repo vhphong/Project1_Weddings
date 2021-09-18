@@ -25,7 +25,7 @@ export default function AllExpenseViewerPage() {
             <div>
 
                 {/* shows records manually*/}
-                <h3>Show All Expenses</h3>
+                <h3>View All Expenses</h3>
                 <button onClick={getAllExpenses}>Get All Expenses</button>
 
                 {/* shows records automatically*/}

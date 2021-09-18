@@ -18,7 +18,7 @@ export default function AllExpenseTable(props) {
             <tbody>
                 {retrievedExpenses.map(e =>
                     <tr key={e.expenseID}>
-                        <td style={{ "textAlign": "center" }}>{e.expenseID}</td>
+                        <td style={{ "textAlign": "center" }}>{e.id}</td>
                         <td style={{ "textAlign": "center" }}>{e.email}</td>
                         <td style={{ "textAlign": "left" }}>{e.reason}</td>
                         {/* <td style={{ "textAlign": "right" }}>{'$' + e.amount.toFixed(2)}</td> */}
