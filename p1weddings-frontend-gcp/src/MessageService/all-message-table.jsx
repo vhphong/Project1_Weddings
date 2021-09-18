@@ -12,6 +12,7 @@ export default function AllMessageTable(props) {
                     <th>Sender</th>
                     <th>Recipient</th>
                     <th>Content</th>
+                    <th>Date & Time</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,6 +22,7 @@ export default function AllMessageTable(props) {
                         <td>{m.sender}</td>
                         <td>{m.recipient}</td>
                         <td>{m.note}</td>
+                        <td>{m.datetimestamp}</td>
                     </tr>
                 )}
             </tbody>

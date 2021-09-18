@@ -13,12 +13,30 @@ export default function CreateMessagePage() {
             const noteContentInput = String(noteContent.current.value);
             const senderEmailInput = String(senderEmail.current.value);
             const recipientEmailInput = String(recipientEmail.current.value);
+            var myCurrentDate = new Date();
+            var date = (myCurrentDate.getMonth() + 1) + '/' + myCurrentDate.getDate() + '/' + myCurrentDate.getFullYear() + ' ' + myCurrentDate.getHours() + ':' + myCurrentDate.getMinutes() + ':' + myCurrentDate.getSeconds();
+            const newCurrentDate = "Current Date and Time: " + date;
 
+            // document.getElementById('newCurrentDate').innerHTML = newCurrentDate;    // test current date time
+
+
+
+
+
+
+
+
+
+
+
+            // alert("date: " + date);
+            // alert("time: " + time);
 
             const newMessage = {
                 note: noteContentInput,
                 sender: senderEmailInput,
-                recipient: recipientEmailInput
+                recipient: recipientEmailInput,
+                datetimestamp: date
             };
 
             // alert('senderEmailInput: ' + senderEmailInput);
@@ -47,6 +65,9 @@ export default function CreateMessagePage() {
             <div>
                 <h3>Internal Message Service Page</h3>
             </div>
+
+            <p id='newCurrentDate'></p>
+
 
             <div>
                 <textarea placeholder="note" ref={noteContent}></textarea>
