@@ -10,23 +10,31 @@ export default function EmployeeLoginPage() {
 
     async function EmployeeLogin(event) {
         try {
-            const employeeEmailInput = employeeEmailToLogin.current.value;
-            const employeePasswordInput = employeePasswordToLogin.current.value;
+            const emailLoginInput = String(employeeEmailToLogin.current.value);
+            const passwordLoginInput = String(employeePasswordToLogin.current.value);
 
-            // verify that if employeeEmailInput exists, returns TRUE if email exists
+            alert('emailLoginInput: ' + emailLoginInput);
+            alert('passwordLoginInput: ' + passwordLoginInput);
 
-            // verify that employee email and password exist
-            const savedPassword = await axios.get(`http://localhost:3000/users/${employeeEmailInput}/verifypassword`);
-            // document.getElementById("loginresult").innerHTML = "savedPassword: " + JSON.stringify(savedPassword.data);
-
-            // compare employeePasswordInput to the saved password in the database
-            if (employeePasswordInput === JSON.stringify(savedPassword.data)) {
-                document.getElementById("loginresult").innerHTML = `logged in as ${employeeEmailInput}`;
-                window.open("/", "_blank");
+            const loginData = {
+                email: emailLoginInput,
+                password: passwordLoginInput
             }
 
+            // validate email and password
+            const validation = await axios.patch('http://localhost:3000/employees/login', loginData);
+
+            alert('validation.data: ' + validation.data);
+
+            // get a response if BOTH email and password are validated
+            if (validation.data === false) {
+                // 
+            } else {
+                document.getElementById("loginresult").innerHTML = `logged in as ${emailLoginInput}`;
+                window.open("/", "_blank");
+            }
         } catch (error) {
-            document.getElementById("loginresult").innerHTML = "Invalid email and/or password";
+            document.getElementById("loginresult").innerHTML = `invalid email/password`;
             // window.location.reload();
         }
     }
@@ -47,7 +55,7 @@ export default function EmployeeLoginPage() {
                 <input placeholder="password" ref={employeePasswordToLogin} type="password" required></input>
 
             </div>
-            
+
             <div>
                 <p id="loginresult"></p>
             </div>

@@ -21,7 +21,8 @@ export default function AllExpenseTable(props) {
                         <td style={{ "textAlign": "center" }}>{e.expenseID}</td>
                         <td style={{ "textAlign": "center" }}>{e.email}</td>
                         <td style={{ "textAlign": "left" }}>{e.reason}</td>
-                        <td style={{ "textAlign": "right" }}>{e.amount.toFixed(2)}</td>
+                        {/* <td style={{ "textAlign": "right" }}>{'$' + e.amount.toFixed(2)}</td> */}
+                        <td style={{ "textAlign": "right" }}>{'$ ' + e.amount}</td>
                     </tr>
                 )}
             </tbody>

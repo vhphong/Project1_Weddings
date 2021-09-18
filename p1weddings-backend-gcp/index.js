@@ -40,10 +40,10 @@ app.get("/weddings", async (req, res) => {
 
 // GET a wedding by email
 app.get("/weddings/:email", async (req, res) => {
-    const key = datastore.key(["Weddings", req.params.email]);
-    const wedding = await datastore.get(key);
+    const key = datastore.key(["Weddings", String(req.params.email)]);
+    const response = await datastore.get(key);
 
-    res.send(wedding);
+    res.send(response[0]);
 });
 
 
@@ -75,7 +75,9 @@ app.delete("/weddings/:email", async (req, res) => {
 // CREATE a new Expense
 app.post("/expenses", async (req, res) => {
     const expense = req.body;
-    const key = datastore.key(["Expenses", expense.expenseID]);
+    const key = datastore.key(["Expenses"]);
+    // const key = datastore.key(["Expenses", Number(expense.expenseID)]); // not working
+    // const key = datastore.key(["Expenses", String(expense.email)]);      // working
     const response = await datastore.save({ key: key, data: expense });
 
     res.status(201);
@@ -103,10 +105,31 @@ app.get("/expenses/:expenseid", async (req, res) => {
 
 // GET expense by wedding email
 app.get("/expenses/email/:email", async (req, res) => {
-    const key = datastore.key(["Expenses", req.params.email]);
+    const key = datastore.key(["Expenses", String(req.params.email)]);
     const expense = await datastore.get(key);
 
-    res.send(expense);
+    res.send(expense[0]);
+});
+
+// UPDATE a wedding by email
+// app.put("weddings/:email", async (req, res) => {
+//     const newData = req.body;
+//     const key = datastore.key(["Weddings", String(req.params.email)]);
+//     const response = await datastore.merge({ key: key, data: newData });
+//     const updatedWedding = await datastore.get(key);
+
+//     res.send(updatedWedding);
+// });
+
+
+// UPDATE an expense by expenseID
+app.put("expenses/:id", async (req, res) => {
+    const newData = req.body;
+    const key = datastore.key(["Expenses", Number(req.params.id)]);
+    const response = await datastore.merge({ key: key, data: newData });
+    const updatedExpense = await datastore.get(key);
+
+    res.send(updatedExpense);
 });
 
 
@@ -119,8 +142,10 @@ app.delete("/expenses/:expenseid", async (req, res) => {
 });
 
 
+
 // =======================================
 // Employee Services
+
 // Employee {email:"" (unique indentifier), employeeID, fName, lName, password}
 // {"email":"phong@email.com","employeeID":1,"fName":"Phong","lName":"Vo","password":"blue"}
 // {"email":"eric@email.com","employeeID":2,"fName":"Eric","lName":"Thomson","password":"red"}
@@ -146,7 +171,7 @@ app.get('/employees', async (req, res) => {
 });
 
 
-// get an Employee by email
+// GET an Employee by email
 app.get('/employees/:email', async (req, res) => {
     const key = datastore.key(['Employee', req.params.email]);
     const employee = await datastore.get(key);
@@ -156,14 +181,65 @@ app.get('/employees/:email', async (req, res) => {
 });
 
 
+// VERIFY an employee email 
+// http://localhost:3000/users/${employeeEmailInput}/verify
+app.get('/employees/:email/verify', async (req, res) => {
+
+    const email = req.params.email;
+    console.log("email: " + email);
+
+    const query = datastore.createQuery('Employee').filter('email', '=', email);
+
+    const [emailData] = await datastore.runQuery(query);
+
+    // emailData.length = 0 if email DNE; =1 if exists
+    if (emailData.length === 0) {
+        res.status(404);
+        res.send(false);
+    }
+
+    if (emailData.length === 1) {
+        res.status(200);
+        res.send(true);
+    }
+});
+
+
 // UPDATE Employee by email
 app.put('/employees/:email', async (req, res) => {
-    newData = req.body;
+    const newData = req.body;
     const key = datastore.key(['Employee', req.params.email]);
     const response = await datastore.merge({ key: key, data: newData });
     const updatedEmployee = await datastore.get(key);
 
     res.send(updatedEmployee);
+});
+
+
+// LOGIN
+// http://localhost:3000/employees/login
+app.patch('/employees/login', async (req, res) => {
+    const loginData = req.body;
+    const emailInput = req.body.email;
+    const passwordInput = req.body.password;
+
+    const query = datastore.createQuery('Employee').filter('email', '=', emailInput).filter('password', '=', passwordInput);
+
+    const [data] = await datastore.runQuery(query);
+
+    // data.length = 0 if email DNE; = 1 if exists
+    if (data.length === 0) {
+        res.status(404);
+        res.send(false);
+    }
+
+    if (data.length === 1) {
+        res.status(200);
+        const key = datastore.key(['Employee', emailInput]);
+        const employee = await datastore.get(key);
+
+        res.send(JSON.stringify(employee));        
+    }
 });
 
 
@@ -178,6 +254,7 @@ app.delete('/employees/:email', async (req, res) => {
 
 // =======================================
 // Message Services
+
 // Message {"messageID":"" (unique indentifier), sender, recipient, note}
 // {"sender":"phong@email.com","recipient":"eric@email.com","note":"Hello"}
 // {"sender":"eric@email.com","recipient":"phong@email.com","note":"Hi"}
@@ -186,10 +263,11 @@ app.delete('/employees/:email', async (req, res) => {
 
 // CREATE a new message
 app.post('/messages', async (req, res) => {
-    const message = req.body;
 
-    const senderEmail = message.sender;
-    const recipientEmail = message.recipient;
+    const newMessage = req.body;
+
+    const senderEmail = newMessage.sender;
+    const recipientEmail = newMessage.recipient;
 
     console.log("senderEmail: " + senderEmail);
     console.log("recipientEmail: " + recipientEmail);
@@ -203,20 +281,29 @@ app.post('/messages', async (req, res) => {
     const [senderData] = await datastore.runQuery(senderQuery);
     const [recipientData] = await datastore.runQuery(recipientQuery);
 
-    console.log("senderData: " + senderData.length);    // senderData = 0 if email DNE; =1 if exists
-    console.log("recipientData: " + recipientData.length);    // senderData = 0 if email DNE; =1 if exists
 
+    // senderData.length = 0 if email DNE; =1 if exists
+    if (senderData.length === 0) {
+        res.status(404);
+        res.send("Sender is invalid.");
+    }
+
+    if (recipientData.length === 0) {
+        res.status(404);
+        res.send("Recipient is invalid.");
+    }
+    
     // if both sender and recipient are valid
     if ((senderData.length === 1) && (recipientData.length === 1)) {
-        const key = datastore.key(['Message']); // auto generated key
-        const response = await datastore.save({ key: key, data: message });
+        const messageKey = datastore.key(['Message']);  // autogenerated key
+        const response = await datastore.save({ key: messageKey, data: newMessage });
+    
         res.status(201);
         res.send("Successfully created a new message");
     } else {
         res.status(404);
         res.send("Invalid email(s)");
     }
-    
 });
 
 
@@ -267,6 +354,7 @@ app.get('/messages/:mid', async (req, res) => {
 
 
 
-
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, () => console.log("Application started"));
 
 app.listen(3000, () => console.log("Application started"));

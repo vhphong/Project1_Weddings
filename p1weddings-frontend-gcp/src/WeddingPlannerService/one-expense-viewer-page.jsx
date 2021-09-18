@@ -12,7 +12,10 @@ export default function OneExpenseViewerPage() {
 
     async function getOneExpense(event) {
         try {
-            const expenseID = expenseIdInputToShow.current.value;
+
+            alert("getOneExpense called")
+
+            const expenseID = Number(expenseIdInputToShow.current.value);
             const response = await axios.get(`http://localhost:3000/expenses/${expenseID}`);
             console.log(response);
             const oneExpenseResult = response.data;
@@ -21,11 +24,12 @@ export default function OneExpenseViewerPage() {
             document.getElementById("expenseid").innerHTML = oneExpenseResult.expenseID;
             document.getElementById("wid").innerHTML = oneExpenseResult.email;
             document.getElementById("reason").innerHTML = oneExpenseResult.reason;
-            document.getElementById("amount").innerHTML = oneExpenseResult.amount.toFixed(2);
+            document.getElementById("amount").innerHTML = oneExpenseResult.amount;
 
             document.getElementById("oneexpenseresult").innerHTML = "";
         } catch (error) {
-            console.log(error);
+            alert(error);
+            
             document.getElementById("oneexpenseresult").innerHTML = `Expense ID ${expenseIdInputToShow.current.value} does not exist or was deleted!`;
 
             document.getElementById("expenseid").innerHTML = "";
@@ -45,7 +49,7 @@ export default function OneExpenseViewerPage() {
                 <h3>Show An Expense</h3>
             </div>
             <div>
-                <input placeholder="expense ID to SHOW" type="number" ref={expenseIdInputToShow} required></input>
+                <input placeholder="expense ID" type="number" ref={expenseIdInputToShow} required></input>
                 <button onClick={getOneExpense}>GET an Expense</button>
             </div>
             <div>
@@ -56,7 +60,7 @@ export default function OneExpenseViewerPage() {
                     <thead>
                         <tr>
                             <th>Expense ID</th>
-                            <th>Wedding ID</th>
+                            <th>Wedding email ID</th>
                             <th>Reason</th>
                             <th>Amount</th>
                         </tr>

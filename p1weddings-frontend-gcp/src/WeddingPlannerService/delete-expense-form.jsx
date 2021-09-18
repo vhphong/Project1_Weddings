@@ -28,12 +28,11 @@ export default function DeleteExpenseForm() {
                 <h3>Delete An Expense</h3>
             </div>
             <div>
-                <input placeholder="expense ID to DELETE" type="number" ref={expenseIdInputToDelete}></input>
+                <input placeholder="expense ID" type="number" ref={expenseIdInputToDelete}></input>
             </div>
             <div>
                 <button onClick={deleteExpense}>Delete Expense</button>
             </div>
-
         </div>
     )
 }

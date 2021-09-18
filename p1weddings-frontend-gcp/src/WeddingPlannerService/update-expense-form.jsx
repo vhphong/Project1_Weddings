@@ -6,15 +6,16 @@ export default function UpdateExpenseForm() {
 
     // GOOD================================================
     const expenseIdInputToUpdate = useRef(null);
-    const weddingIdInputToUpdate = useRef(null);
+    // const weddingIdInputToUpdate = useRef(null);
     const reasonInputToUpdate = useRef(null);
     const amountInputToUpdate = useRef(null);
 
     async function updateExpense(event) {
+        alert("updateExpense called");
 
         let newExpenseToUpdate = {
             expenseID: expenseIdInputToUpdate.current.value,
-            wedding_ID: weddingIdInputToUpdate.current.value,
+            // wedding_ID: weddingIdInputToUpdate.current.value,
             reason: reasonInputToUpdate.current.value,
             amount: amountInputToUpdate.current.value
         }
@@ -36,10 +37,10 @@ export default function UpdateExpenseForm() {
                 <h3>Update An Expense</h3>
             </div>
             <div>
-                <input placeholder="expense ID to UPDATE" type="number" ref={expenseIdInputToUpdate}></input>
-                <input placeholder="wedding ID to UPDATE" type="number" ref={weddingIdInputToUpdate}></input>
-                <input placeholder="reason to UPDATE" ref={reasonInputToUpdate}></input>
-                <input placeholder="amount to UPDATE" type="number" ref={amountInputToUpdate}></input>
+                <input placeholder="expense ID" type="number" ref={expenseIdInputToUpdate}></input>
+                {/* <input placeholder="wedding ID to UPDATE" type="number" ref={weddingIdInputToUpdate}></input> */}
+                <input placeholder="reason" ref={reasonInputToUpdate}></input>
+                <input placeholder="amount" type="number" ref={amountInputToUpdate}></input>
             </div>
             <div>
                 <button onClick={updateExpense}>UPDATE An Expense</button>
