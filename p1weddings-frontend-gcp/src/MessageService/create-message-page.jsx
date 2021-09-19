@@ -7,7 +7,6 @@ export default function CreateMessagePage() {
     const recipientEmail = useRef(null);
 
     async function sendMessage(event) {
-        // alert(`GCP: sendMessage function called`);
 
         try {
             const noteContentInput = String(noteContent.current.value);
@@ -16,21 +15,6 @@ export default function CreateMessagePage() {
             var myCurrentDate = new Date();
             var date = (myCurrentDate.getMonth() + 1) + '/' + myCurrentDate.getDate() + '/' + myCurrentDate.getFullYear() + ' ' + myCurrentDate.getHours() + ':' + myCurrentDate.getMinutes() + ':' + myCurrentDate.getSeconds();
             const newCurrentDate = "Current Date and Time: " + date;
-
-            // document.getElementById('newCurrentDate').innerHTML = newCurrentDate;    // test current date time
-
-
-
-
-
-
-
-
-
-
-
-            // alert("date: " + date);
-            // alert("time: " + time);
 
             const newMessage = {
                 note: noteContentInput,
@@ -49,8 +33,6 @@ export default function CreateMessagePage() {
             // create a message if BOTH emails are verified
             if ((senderValidation.data === true) && (recipientValidation.data === true)) {
                 const response = await axios.post("http://localhost:3000/messages", newMessage);
-
-                // alert("A new message created. :)) ");
                 document.getElementById("chatresult").innerHTML = `Hi ${senderEmailInput}! Your message was sent to ${recipientEmailInput}.`;
             }
         } catch (error) {

@@ -52,7 +52,7 @@ ReactDOM.render(
       <button onClick={() => window.open("/login", "_self")}>Login Page</button>
       <button onClick={() => window.open("/messagesservice", "_self")}>Message Service Page</button>
       <button onClick={() => window.open("/weddingplanner", "_self")}>Wedding Planner Page</button>
-      
+
 
 
       {/* <button onClick={() => window.open("/weddings", "_self")}>Wedding Page</button>
@@ -84,14 +84,14 @@ ReactDOM.render(
       <Route path="/expenses/viewall"><AllExpenseViewerPage></AllExpenseViewerPage></Route>
 
       <Route path="/expenses/view"><OneExpenseViewerPage></OneExpenseViewerPage></Route>
-      
+
       <Route path="/expenses/viewbyemail"><AllExpenseViewerPageByWeddingEmail></AllExpenseViewerPageByWeddingEmail></Route>
 
       <Route path="/expenses/update"><UpdateExpenseForm></UpdateExpenseForm></Route>
 
       <Route path="/expenses/delete"><DeleteExpenseForm></DeleteExpenseForm></Route>
 
-    
+
 
       <Route path="/login"><EmployeeLoginPage></EmployeeLoginPage></Route>
 
@@ -106,7 +106,7 @@ ReactDOM.render(
       <Route path="/messages/sender"><AllMessageViewerPageOfSender></AllMessageViewerPageOfSender></Route>
 
       <Route path="/messages/recipient"><AllMessageViewerPageOfRecipient></AllMessageViewerPageOfRecipient></Route>
-      
+
       <Route path="/messages/sender_recipient"><AllMessageViewerPageOfSenderRecipient></AllMessageViewerPageOfSenderRecipient></Route>
 
 
@@ -114,7 +114,7 @@ ReactDOM.render(
     </Router>
 
 
-  {/* <OneWeddingTable></OneWeddingTable> */}
+    {/* <OneWeddingTable></OneWeddingTable> */}
 
   </React.StrictMode>,
   document.getElementById('root')

@@ -34,15 +34,10 @@ export default function EmployeeLoginPage() {
                 window.open("/", "_blank");
             }
         } catch (error) {
-            document.getElementById("loginresult").innerHTML = `invalid email/password`;
+            document.getElementById("loginresult").innerHTML = `invalid email and/or password`;
             // window.location.reload();
         }
     }
-
-
-
-
-
     return (
         <div>
             {/* EMPLOYEE LOGIN PAGE */}
@@ -51,9 +46,8 @@ export default function EmployeeLoginPage() {
             </div>
 
             <div>
-                <input placeholder="email" ref={employeeEmailToLogin} required></input>
+                <input placeholder="email" ref={employeeEmailToLogin} type='email' required></input>
                 <input placeholder="password" ref={employeePasswordToLogin} type="password" required></input>
-
             </div>
 
             <div>

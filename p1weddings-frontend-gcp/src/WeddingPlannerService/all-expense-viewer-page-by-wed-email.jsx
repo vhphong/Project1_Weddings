@@ -12,13 +12,13 @@ export default function AllExpenseViewerPageByWeddingEmail() {
 
     async function getAllExpenses(event) {
         const expenseEmailInput = String(expenseEmail.current.value);
-        const response = await axios.get(`http://localhost:3000/expenses/email/${expenseEmailInput}`);
+        const response = await axios.get(`http://localhost:3000/weddings/${expenseEmailInput}/expenses`);
         console.log(response);
         const allExpensesResult = response.data;
         setAllExpenses(allExpensesResult);
     }
 
-
+    
     return (
         <div>
             {/* ================================================ */}
